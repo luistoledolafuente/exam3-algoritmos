@@ -2073,5 +2073,5 @@ Deletion plus rebalancing preserves AVL’s O(log n) performance, even when remo
 
 ---
 
-💡 *Created with AI support by Elliot Garamendi 👨‍💻*
+💡 *Created with AI support by Luis Toledo and Rodrigo Salva 👨‍💻*
 🤖 *Assisted by ChatGPT – Your creative teaching co-pilot 🚀*
