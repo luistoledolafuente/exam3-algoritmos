@@ -1,5 +1,5 @@
 class ExprNode:
-    """Node for expression tree."""
+    """🔢 Node for expression tree."""
     def __init__(self, value):
         self.value = value
         self.left = None
@@ -9,11 +9,12 @@ class ExprNode:
         return self.value in ['+', '-', '*', '/']
 
 class EvaluableExpressionTree:
-    """Expression tree that can be evaluated with variables."""
+    """🧮 Expression tree that can be evaluated with variables."""
     def __init__(self):
-        self.root = None  # 🌱 Root of expression tree
+        super().__init__()  # Initializes self.root = None
 
     def evaluate_with_variables(self, variables):
+        
         """
         🧮 Evaluate expression tree using provided `variables` dict.
         """
@@ -46,72 +47,7 @@ class EvaluableExpressionTree:
                         raise ValueError(f"Unknown variable: {node.value}")
         
         return eval_node(self.root)
-
-
-# Helper para construir árbol a partir de postfijo
-def build_expression_tree(postfix):
-    stack = []
-    ops = set(["+", "-", "*", "/"])
-    for tok in postfix:
-        node = ExprNode(tok)
-        if tok in ops:
-            node.right = stack.pop()
-            node.left = stack.pop()
-        stack.append(node)
-    return stack.pop() if stack else None
-
-class ExprNode:
-    """🔢 Node for expression tree."""
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
-    
-    def is_operator(self):
-        return self.value in ['+', '-', '*', '/']
-
-class ExpressionTree:
-    """📝 Binary tree for building and traversing expressions."""
-    def __init__(self):
-        self.root = None  # 🌱 Root of the expression tree
-
-class EvaluableExpressionTree(ExpressionTree):
-    """🧮 Expression tree that can be evaluated with variables."""
-    def __init__(self):
-        super().__init__()
-
-    def evaluate_with_variables(self, variables):
-        def eval_node(node):
-            if node is None:
-                raise ValueError("Empty node in expression.")
-
-            if not node.is_operator():
-                # Try parsing as float
-                try:
-                    return float(node.value)
-                except ValueError:
-                    # Look up in variables
-                    if node.value in variables:
-                        return float(variables[node.value])
-                    else:
-                        raise ValueError(f"Unknown variable: {node.value}")
-            
-            # It's an operator: evaluate left and right
-            left_val = eval_node(node.left)
-            right_val = eval_node(node.right)
-
-            if node.value == '+':
-                return left_val + right_val
-            elif node.value == '-':
-                return left_val - right_val
-            elif node.value == '*':
-                return left_val * right_val
-            elif node.value == '/':
-                if right_val == 0:
-                    raise ValueError("Division by zero!")
-                return left_val / right_val
-
-        return eval_node(self.root)
+        
 
 # Helper to build a tree from postfix for tests
 def build_expression_tree(postfix):
@@ -124,7 +60,6 @@ def build_expression_tree(postfix):
             node.left = stack.pop()
         stack.append(node)
     return stack.pop() if stack else None
-
 
 # 🧪 Test cases
 def test_evaluate_with_vars():

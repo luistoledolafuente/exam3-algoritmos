@@ -1,12 +1,8 @@
 class ExprNode:
-    """🔢 Node for expression tree."""
     def __init__(self, value):
         self.value = value
         self.left = None
         self.right = None
-
-    def is_operator(self):
-        return self.value in ['+', '-', '*', '/']
 
 class ExpressionTree:
     def __init__(self):
@@ -15,9 +11,10 @@ class ExpressionTree:
     def build_from_postfix(self, postfix_tokens):
         """🔨 Build tree from postfix tokens using a stack."""
         stack = []
+        operators = {'+', '-', '*', '/'}
         for token in postfix_tokens:
             node = ExprNode(token)
-            if node.is_operator():
+            if token in operators:
                 node.right = stack.pop()
                 node.left = stack.pop()
             stack.append(node)
@@ -28,7 +25,7 @@ def test_build_from_postfix():
     tree = ExpressionTree()
     tree.build_from_postfix(["2", "3", "+"])
     cond1 = (tree.root and tree.root.value == "+" and 
-            tree.root.left.value == "2" and tree.root.right.value == "3")
+             tree.root.left.value == "2" and tree.root.right.value == "3")
     print("➕ Test 1:", cond1)
 
     tree = ExpressionTree()

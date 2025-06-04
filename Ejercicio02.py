@@ -1,23 +1,23 @@
 class GenericTreeNode:
-    """🌿 Node of a generic tree."""
+    """🌳 Node for a generic tree (multiple children)."""
     def __init__(self, value):
         self.value = value
         self.children = []
-
+    
     def add_child(self, value):
-        """Add a child to the node."""
+        """➕ Add a child node with the given value, return the new node."""
         child = GenericTreeNode(value)
         self.children.append(child)
         return child
 
 class GenericTree:
-    """🌳 Generic tree implementation with basic operations."""
+    """🌿 Generic tree with basic operations."""
     def __init__(self):
-        self.root = None  # 🌱 Root of the tree
+        self.root = None  # 🌱 Root of the generic tree
 
     def preorder_traversal(self, node=None, result=None):
         """
-        📝 Visit node first, then all children (DLR).
+        📝 Visit node first, then all children (DLR) in left-to-right order.
         Returns a list of values in preorder.
         """
         if result is None:
@@ -31,14 +31,13 @@ class GenericTree:
             self.preorder_traversal(child, result)
         return result
 
-
 # 🧪 Test cases
 def test_generic_preorder():
-    tree = GenericTree()
     # Test 1: Empty tree
-    print("🚶 Test 1:", tree.preorder_traversal() == [])  # 📭
+    tree = GenericTree()
+    print("🚶 Test 1:", tree.preorder_traversal() == [])
 
-    # Construct tree:
+    # Build tree:
     #      A
     #    / | \
     #   B  C  D
@@ -50,23 +49,22 @@ def test_generic_preorder():
     d = tree.root.add_child("D")
     c.add_child("E")
 
-    # Test 2
-    print("🚶 Test 2:", tree.preorder_traversal() == ["A", "B", "C", "E", "D"])  # ✅
+    # Test 2: Two-level
+    print("🚶 Test 2:", tree.preorder_traversal() == ["A", "B", "C", "E", "D"])
 
-    # Test 3: Single node after resetting
+    # Test 3: Single-node after resetting
     single = GenericTree()
     single.root = GenericTreeNode(42)
-    print("🚶 Test 3:", single.preorder_traversal() == [42])  # 🌱
+    print("🚶 Test 3:", single.preorder_traversal() == [42])
 
-    # Test 4: More complex
+    # Test 4: More complex (add extra children)
     c.add_child("F")
     b.add_child("G")
-    print("🚶 Test 4:", tree.preorder_traversal() == ["A", "B", "G", "C", "E", "F", "D"])  # 🔁
+    print("🚶 Test 4:", tree.preorder_traversal() == ["A", "B", "G", "C", "E", "F", "D"])
 
     # Test 5: Verify no duplication
     values = tree.preorder_traversal()
-    print("🚶 Test 5:", len(values) == len(set(values)))  # 📏 Unique
-
+    print("🚶 Test 5:", len(values) == len(set(values)))
 
 # 🚀 Run tests
 test_generic_preorder()
