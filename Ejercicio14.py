@@ -6,19 +6,19 @@ class Node:
         self.right = None
 
 class BinarySearchTree:
-    """🌳 BST with working insert and build_from_list."""
+    """🌳 BST with working insert and incomplete build_from_list."""
     def __init__(self):
         self.root = None  # 📭 Initially empty
 
     def insert(self, value):
-        """🧩 Insert a value into the BST."""
+        """🧩 Insert a value into the BST (already implemented)."""
         if self.root is None:
             self.root = Node(value)
         else:
             self._insert(self.root, value)
 
     def _insert(self, node, value):
-        """🔄 Recursive helper for insert."""
+        """🔄 Recursive helper for insert (already implemented)."""
         if value < node.value:
             if node.left is None:
                 node.left = Node(value)
@@ -32,14 +32,11 @@ class BinarySearchTree:
 
     def build_from_list(self, values):
         """📦 Build BST from a list of integer values."""
-        for value in values:
-            self.insert(value)
+        for v in values:
+            self.insert(v)
 
+# Reuse inorder_traversal from Challenge 4 for test 5:
 def inorder_traversal(node, result_list):
-    """
-    📝 Inorder traversal: left → root → right.
-    Appends node values to result_list in sorted order.
-    """
     if node is None:
         return
     inorder_traversal(node.left, result_list)

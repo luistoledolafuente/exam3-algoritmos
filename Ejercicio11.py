@@ -6,7 +6,7 @@ class Node:
         self.right = None
 
 class BinarySearchTree:
-    """🌳 BST with insert functionality."""
+    """🌳 BST with insert functionality (incomplete)."""
     def __init__(self):
         self.root = None  # 📭 Initially empty
 
@@ -25,7 +25,6 @@ class BinarySearchTree:
             else:
                 self._insert(node.left, value)
         else:
-            # Duplicates go to the right
             if node.right is None:
                 node.right = Node(value)
             else:

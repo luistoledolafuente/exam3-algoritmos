@@ -22,15 +22,12 @@ class AVLTree:
         """
         y = z.right
         T2 = y.left
-
-        # Rotation
+        # Perform rotation
         y.left = z
         z.right = T2
-
         # Update heights
         z.height = 1 + max(self.get_height(z.left), self.get_height(z.right))
         y.height = 1 + max(self.get_height(y.left), self.get_height(y.right))
-
         return y
 
     def right_rotate(self, z):
@@ -39,15 +36,12 @@ class AVLTree:
         """
         y = z.left
         T3 = y.right
-
-        # Rotation
+        # Perform rotation
         y.right = z
         z.left = T3
-
         # Update heights
         z.height = 1 + max(self.get_height(z.left), self.get_height(z.right))
         y.height = 1 + max(self.get_height(y.left), self.get_height(y.right))
-
         return y
 
 # 🧪 Test cases

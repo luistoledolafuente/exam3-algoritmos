@@ -32,7 +32,6 @@ class BinarySearchTree:
 
     def build_from_list(self, values):
         """📦 Build BST from a list of integer values."""
-        self.root = None  # Reiniciar árbol para lista nueva
         for v in values:
             self.insert(v)
 

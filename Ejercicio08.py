@@ -3,9 +3,8 @@ class Node:
         self.value = value
         self.left = None
         self.right = None
-
 class ExpressionTree:
-    """🌳 Expression tree with build and traversal implemented."""
+    """🌳 Expression tree with build and traversal placeholders."""
     def __init__(self):
         self.root = None
 
@@ -29,17 +28,16 @@ class ExpressionTree:
             node = self.root
         if node is None:
             return result
-        # If node is an operator, add parentheses
-        if node.left or node.right:
-            result.append("(")
-        if node.left:
-            self.inorder(node.left, result)
-        result.append(node.value)
-        if node.right:
-            self.inorder(node.right, result)
-        if node.left or node.right:
-            result.append(")")
+        if node.left is None and node.right is None:
+            result.append(str(node.value))
+            return result
+        result.append("(")
+        self.inorder(node.left, result)
+        result.append(str(node.value))
+        self.inorder(node.right, result)
+        result.append(")")
         return result
+        
 
     def preorder(self, node=None, result=None):
         """🚀 Preorder traversal (root, left, right) to generate prefix tokens."""
@@ -49,7 +47,7 @@ class ExpressionTree:
             node = self.root
         if node is None:
             return result
-        result.append(node.value)
+        result.append(str(node.value))
         if node.left:
             self.preorder(node.left, result)
         if node.right:
@@ -68,9 +66,8 @@ class ExpressionTree:
             self.postorder(node.left, result)
         if node.right:
             self.postorder(node.right, result)
-        result.append(node.value)
+        result.append(str(node.value))
         return result
-
 
 # Helper to build for tests
 def build_tree(postfix):
@@ -83,7 +80,6 @@ def build_tree(postfix):
             node.left = stack.pop()
         stack.append(node)
     return stack.pop() if stack else None
-
 
 # 🧪 Test cases
 def test_traversals():

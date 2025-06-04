@@ -6,7 +6,7 @@ class Node:
         self.right = None
 
 class BinarySearchTree:
-    """🌳 BST with working insert and search."""
+    """🌳 BST with working insert and incomplete search."""
     def __init__(self):
         self.root = None  # 📭 Initially empty
 
@@ -33,6 +33,7 @@ class BinarySearchTree:
     def search(self, value):
         """🔍 Return True if value exists in BST, else False."""
         return self._search(self.root, value)
+    
 
     def _search(self, node, value):
         """🔁 Recursive search helper."""
@@ -40,10 +41,11 @@ class BinarySearchTree:
             return False
         if node.value == value:
             return True
-        elif value < node.value:
+        if value < node.value:
             return self._search(node.left, value)
         else:
             return self._search(node.right, value)
+        
 
 # 🧪 Test cases
 def test_search():

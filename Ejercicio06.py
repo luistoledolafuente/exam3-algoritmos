@@ -1,4 +1,5 @@
 class ExprNode:
+    """🌿 Nodo para árbol de expresiones"""
     def __init__(self, value):
         self.value = value
         self.left = None
@@ -9,9 +10,9 @@ class ExpressionTree:
         self.root = None
 
     def build_from_postfix(self, postfix_tokens):
-        """🔨 Build tree from postfix tokens using a stack."""
+        """🔨 Construir árbol desde tokens en notación postfija"""
         stack = []
-        operators = {'+', '-', '*', '/'}
+        operators = {"+", "-", "*", "/"}
         for token in postfix_tokens:
             node = ExprNode(token)
             if token in operators:
@@ -20,7 +21,8 @@ class ExpressionTree:
             stack.append(node)
         self.root = stack.pop() if stack else None
 
-# 🧪 Test cases
+
+# 🧪 Casos de prueba
 def test_build_from_postfix():
     tree = ExpressionTree()
     tree.build_from_postfix(["2", "3", "+"])
@@ -51,5 +53,6 @@ def test_build_from_postfix():
     root = tree.root
     print("🌱 Test 5:", root and root.value == "x" and root.left is None and root.right is None)
 
-# 🚀 Run tests
+
+# 🚀 Ejecutar tests
 test_build_from_postfix()

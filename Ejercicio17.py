@@ -14,15 +14,13 @@ class AVLTree:
         """
         📏 Return height of AVL node or 0 if node is None.
         """
-        if node is None:
-            return 0
-        return node.height
+        return node.height if node else 0
 
     def get_balance(self, node):
         """
         ⚖️ Return balance factor: height(left) - height(right), or 0 if node is None.
         """
-        if node is None:
+        if not node:
             return 0
         return self.get_height(node.left) - self.get_height(node.right)
 

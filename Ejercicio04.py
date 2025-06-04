@@ -1,3 +1,6 @@
+from turtle import left
+
+
 class ExprNode:
     """🔢 Node for an expression tree."""
     def __init__(self, value):
@@ -14,21 +17,17 @@ class ExpressionTree:
         self.root = None  # 🌱 Root of the expression tree
 
     def infix_traversal(self, node=None):
-        """
-        📝 Return a string of the infix expression with parentheses.
-        """
         if node is None:
             node = self.root
             if node is None:
                 return ""
-
+            
         if not node.is_operator():
             return str(node.value)
         
         left_expr = self.infix_traversal(node.left)
         right_expr = self.infix_traversal(node.right)
         return f"({left_expr} {node.value} {right_expr})"
-
 # 🧪 Test cases
 def test_infix_traversal():
     tree = ExpressionTree()

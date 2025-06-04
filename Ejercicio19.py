@@ -19,67 +19,50 @@ class AVLTree:
     def left_rotate(self, z):
         y = z.right
         T2 = y.left
-
         y.left = z
         z.right = T2
-
         z.height = 1 + max(self.get_height(z.left), self.get_height(z.right))
         y.height = 1 + max(self.get_height(y.left), self.get_height(y.right))
-
         return y
 
     def right_rotate(self, z):
         y = z.left
         T3 = y.right
-
         y.right = z
         z.left = T3
-
         z.height = 1 + max(self.get_height(z.left), self.get_height(z.right))
         y.height = 1 + max(self.get_height(y.left), self.get_height(y.right))
-
         return y
 
     def insert(self, node, key):
-        # 1. Insert as in BST
-        if node is None:
+        """
+        ➕ Insert key into AVL subtree rooted at node, rebalance if needed, return new root.
+        """
+        if not node:
             return AVLNode(key)
-        elif key < node.key:
+        if key < node.key:
             node.left = self.insert(node.left, key)
-        elif key > node.key:
-            node.right = self.insert(node.right, key)
         else:
-            # Duplicate keys not allowed
-            return node
+            node.right = self.insert(node.right, key)
 
-        # 2. Update height
         node.height = 1 + max(self.get_height(node.left), self.get_height(node.right))
-
-        # 3. Check balance
         balance = self.get_balance(node)
 
-        # 4. Balance cases
-
-        # LL Case
+        # LL
         if balance > 1 and key < node.left.key:
             return self.right_rotate(node)
-
-        # RR Case
+        # RR
         if balance < -1 and key > node.right.key:
             return self.left_rotate(node)
-
-        # LR Case
+        # LR
         if balance > 1 and key > node.left.key:
             node.left = self.left_rotate(node.left)
             return self.right_rotate(node)
-
-        # RL Case
+        # RL
         if balance < -1 and key < node.right.key:
             node.right = self.right_rotate(node.right)
             return self.left_rotate(node)
-
         return node
-
 
 # 🧪 Test cases
 def test_avl_insert():

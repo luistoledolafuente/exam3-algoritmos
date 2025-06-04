@@ -3,9 +3,8 @@ class GenericTreeNode:
     def __init__(self, value):
         self.value = value
         self.children = []
-    
+
     def add_child(self, value):
-        """➕ Add a child node with the given value, return the new node."""
         child = GenericTreeNode(value)
         self.children.append(child)
         return child

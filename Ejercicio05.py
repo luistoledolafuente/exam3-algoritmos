@@ -4,50 +4,44 @@ class ExprNode:
         self.value = value
         self.left = None
         self.right = None
-    
+
     def is_operator(self):
         return self.value in ['+', '-', '*', '/']
+
 
 class EvaluableExpressionTree:
     """🧮 Expression tree that can be evaluated with variables."""
     def __init__(self):
-        super().__init__()  # Initializes self.root = None
+        self.root = None  # Corrige esto, no uses super().__init__() innecesariamente
 
     def evaluate_with_variables(self, variables):
-        
-        """
-        🧮 Evaluate expression tree using provided `variables` dict.
-        """
         def eval_node(node):
             if node is None:
                 return 0
-            # Si es operador, evaluamos recursivamente hijos
+
             if node.is_operator():
-                left_val = eval_node(node.left)
-                right_val = eval_node(node.right)
+                left_eval = eval_node(node.left)
+                right_eval = eval_node(node.right)
                 if node.value == '+':
-                    return left_val + right_val
+                    return left_eval + right_eval
                 elif node.value == '-':
-                    return left_val - right_val
+                    return left_eval - right_eval
                 elif node.value == '*':
-                    return left_val * right_val
+                    return left_eval * right_eval
                 elif node.value == '/':
-                    if right_val == 0:
+                    if right_eval == 0:
                         raise ValueError("Division by zero!")
-                    return left_val / right_val
+                    return left_eval / right_eval
             else:
-                # Si no es operador, puede ser número o variable
                 try:
-                    return float(node.value)  # intenta convertir a número
+                    return float(node.value)
                 except ValueError:
-                    # si no es número, debe estar en variables
                     if node.value in variables:
                         return float(variables[node.value])
                     else:
                         raise ValueError(f"Unknown variable: {node.value}")
-        
         return eval_node(self.root)
-        
+
 
 # Helper to build a tree from postfix for tests
 def build_expression_tree(postfix):

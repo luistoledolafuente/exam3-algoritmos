@@ -4,7 +4,7 @@ class AVLNode:
         self.key = key
         self.left = None
         self.right = None
-        self.height = 1  # Altura inicial de un nodo hoja es 1
+        self.height = 1
 
 # 🧪 Test cases
 def test_avl_node():

@@ -6,7 +6,7 @@ class Node:
         self.right = None
 
 class BinarySearchTree:
-    """🌳 BST with working insert and incomplete find_min."""
+    """🌳 BST with working insert and complete find_min."""
     def __init__(self):
         self.root = None  # 📭 Initially empty
 
@@ -35,8 +35,7 @@ class BinarySearchTree:
         if self.root is None:
             return None
         current = self.root
-        # The minimum value is in the leftmost node
-        while current.left is not None:
+        while current.left:
             current = current.left
         return current.value
 

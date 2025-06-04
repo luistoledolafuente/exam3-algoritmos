@@ -11,19 +11,16 @@ class ExpressionTree:
         self.root = None       # 🌱 Root of the expression tree
 
     def build_from_prefix(self, prefix_tokens):
-        """🔨 Build expression tree from prefix notation."""
         def helper(tokens):
             if not tokens:
                 return None
-            token = tokens.pop(0)
+            token =  tokens.pop(0)
             node = ExprNode(token)
             if token in {"+", "-", "*", "/"}:
                 node.left = helper(tokens)
                 node.right = helper(tokens)
             return node
-        
         self.root = helper(prefix_tokens.copy())
-
 # 🧪 Test cases
 def test_build_from_prefix():
     tree = ExpressionTree()
@@ -58,4 +55,4 @@ def test_build_from_prefix():
     print("🌳 Test 5:", tree.root is None)
 
 # 🚀 Run tests
-test_build_from_prefix() 
+test_build_from_prefix()

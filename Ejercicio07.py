@@ -1,22 +1,20 @@
 class Node:
+    """🌿 Nodo para árbol de expresiones"""
     def __init__(self, value):
         self.value = value
         self.left = None
         self.right = None
 
-    def is_operator(self):
-        return self.value in ['+', '-', '*', '/']
-
 class ExpressionTree:
     def __init__(self):
-        self.root = None
+        super().__init__()
 
     def build_from_postfix(self, postfix_tokens):
-        """🔨 Build tree from postfix tokens using a stack."""
         stack = []
+        operators = {"+", "-", "*", "/"}
         for token in postfix_tokens:
             node = Node(token)
-            if node.is_operator():
+            if token in operators:
                 node.right = stack.pop()
                 node.left = stack.pop()
             stack.append(node)
@@ -30,7 +28,8 @@ class EvaluableExpressionTree(ExpressionTree):
         """🧮 Evaluate an expression tree containing integers and +,-,*,/."""
         if node is None:
             node = self.root
-        if not node.is_operator():
+
+        if node.left is None and node.right is None:
             return int(node.value)
         left_val = self.evaluate(node.left)
         right_val = self.evaluate(node.right)
@@ -42,8 +41,20 @@ class EvaluableExpressionTree(ExpressionTree):
             return left_val * right_val
         elif node.value == '/':
             if right_val == 0:
-                raise ValueError("Division by zero")
-            return left_val // right_val  # Use // for integer division
+                raise ValueError("No se puede dividir entre el numero 0")
+            return left_val / right_val
+
+# Helper to build and test
+def build_tree(postfix):
+    stack = []
+    ops = {"+", "-", "*", "/"}
+    for tok in postfix:
+        node = Node(tok)
+        if tok in ops:
+            node.right = stack.pop()
+            node.left  = stack.pop()
+        stack.append(node)
+    return stack.pop() if stack else None
 
 # 🧪 Test cases
 def test_evaluate_expression_tree():
